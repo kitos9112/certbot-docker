@@ -1,11 +1,4 @@
-# Docker Arch (amd64, arm32v6, ...)
-ARG TARGET_ARCH
-FROM ${TARGET_ARCH}/python:3.8-alpine3.11
-
-# Qemu Arch (x86_64, arm, ...)
-ARG QEMU_ARCH
-ENV QEMU_ARCH=${QEMU_ARCH}
-COPY qemu-${QEMU_ARCH}-static /usr/bin/
+FROM python:3.8-alpine3.11
 
 ARG CERTBOT_VERSION
 ENV CERTBOT_VERSION=${CERTBOT_VERSION}
@@ -51,4 +44,4 @@ RUN apk add --no-cache --virtual .build-deps \
     && pip install --no-cache-dir --no-deps \
         --editable src/acme \
         --editable src/certbot \
-&& apk del .build-deps
+    && apk del .build-deps

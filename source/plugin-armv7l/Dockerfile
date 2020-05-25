@@ -1,12 +1,6 @@
-# Docker Arch (amd64, arm32v6, ...)
-ARG TARGET_ARCH
 ARG CERTBOT_VERSION
-FROM certbot/certbot:${TARGET_ARCH}-v${CERTBOT_VERSION}
-
-# Qemu Arch (x86_64, arm, ...)
-ARG QEMU_ARCH
-ENV QEMU_ARCH=${QEMU_ARCH}
-COPY qemu-${QEMU_ARCH}-static /usr/bin/
+ARG DOCKER_REPO
+FROM ${DOCKER_REPO}:v${CERTBOT_VERSION}
 
 ARG PLUGIN_NAME
 
